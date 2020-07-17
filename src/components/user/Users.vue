@@ -201,7 +201,7 @@ export default {
             }
             this.userlist=res.data.users
             this.total= res.data.total
-            console.log(res)
+            // console.log(res)
         },
         // 监听pagesize 改变事件
         handleSizeChange(newSize){
@@ -230,7 +230,7 @@ export default {
         addUser(){
             // 预验证
             this.$refs.addFormRef.validate(async valid =>{
-                console.log(valid)
+                // console.log(valid)
                 if(!valid) return
                 //发起添加用户请求
                 const {data:res} = await this.$http.post('/users',this.addForm)
