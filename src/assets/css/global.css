@@ -2,10 +2,12 @@
 /* gaomingcong*/
 /*padding*/
 html,body,#app{
-        padding:0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
+  padding:0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  min-width: 1024px;
 }
 .padTop30{ padding-top:30px}
 .padTop5{ padding-top:5px}

@@ -22,45 +22,44 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      //这是登录表单的绑定对象
-      loginForm:{
-        username:'admin',
-        password:'123456'
+      // 这是登录表单的绑定对象
+      loginForm: {
+        username: 'admin',
+        password: '123456'
       },
-      loginFormRules:{
-        //验证用户名
+      loginFormRules: {
+        // 验证用户名
         username: [
-          {required: true, message: '请输入用户名', trigger: 'blur'},
-          {min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur'}
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
         ],
-        //验证密码
+        // 验证密码
         password: [
-          {required: true, message: '请输入密码', trigger: 'blur'},
-          {min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur'}
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
         ]
       }
     }
   },
   methods: {
-    //表单重置
+    // 表单重置
     resetloginForm(formName) {
-      this.$refs[formName].resetFields();
+      this.$refs[formName].resetFields()
     },
-    //登录
-    login(){
-      this.$refs.loginFormRef.validate(async valid =>{
-        
-        if(!valid) return;
-        const {data:res}= await this.$http.post("login",this.loginForm);
+    // 登录
+    login() {
+      this.$refs.loginFormRef.validate(async valid => {
+        if (!valid) return
+        const { data: res } = await this.$http.post('login', this.loginForm)
         // console.log(res);
-        if(res.meta.status !==200) return this.$message.error("登录失败");
-        this.$message.success("登录成功");
-        //1.将登录成功后的token , 保存到客户端的sessionStorage中
-        window.sessionStorage.setItem("token",res.data.token);
-        //2.通过编程式导航跳转到后台主页，路由地址是/home
-        this.$router.push("/home");
+        if (res.meta.status !== 200) return this.$message.error('登录失败')
+        this.$message.success('登录成功')
+        // 1.将登录成功后的token , 保存到客户端的sessionStorage中
+        window.sessionStorage.setItem('token', res.data.token)
+        // 2.通过编程式导航跳转到后台主页，路由地址是/home
+        this.$router.push('/home')
       })
     }
   }
