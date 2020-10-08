@@ -9,6 +9,8 @@ import './assets/fonts/iconfont.css'
 import './assets/css/global.css'
 // element布局
 import ElementUI from 'element-ui'
+// tree-table
+import TreeTable from 'vue-table-with-tree-grid'
 // 请求
 import http from './api/config'
 // 全局过滤器
@@ -17,6 +19,8 @@ Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
 Vue.use(ElementUI)
 Vue.prototype.$http = http
 Vue.config.productionTip = false
+
+Vue.component('tree-table', TreeTable)
 
 new Vue({
   router,

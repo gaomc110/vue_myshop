@@ -13,6 +13,7 @@ const Users = () => import(/* webpackChunkName: "Users_Rights_Roles" */ '../view
 const Rpoerts = () => import(/* webpackChunkName: "Order_Rpoerts" */ '../views/report/Report.vue')
 const Rights = () => import(/* webpackChunkName: "Order_Rights" */ '../views/power/Rights.vue')
 const Roles = () => import(/* webpackChunkName: "Order_Roles" */ '../views/power/Roles.vue')
+const Cate = () => import(/* webpackChunkName: "Order_Cate" */ '../views/goods/Cate.vue')
 
 Vue.use(VueRouter)
 
@@ -34,7 +35,8 @@ const routes = [
       { path: '/users', component: Users },
       { path: '/reports', component: Rpoerts },
       { path: '/rights', component: Rights },
-      { path: '/roles', component: Roles }
+      { path: '/roles', component: Roles },
+      { path: '/categories', component: Cate }
     ]
   }
 ]
