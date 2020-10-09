@@ -11,6 +11,12 @@ import './assets/css/global.css'
 import ElementUI from 'element-ui'
 // tree-table
 import TreeTable from 'vue-table-with-tree-grid'
+// 导入富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+// 富文本编辑器的样式
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 // 请求
 import http from './api/config'
 // 全局过滤器
@@ -21,6 +27,7 @@ Vue.prototype.$http = http
 Vue.config.productionTip = false
 
 Vue.component('tree-table', TreeTable)
+Vue.use(VueQuillEditor)
 
 new Vue({
   router,

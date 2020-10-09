@@ -90,7 +90,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .home-container{
     height: 100%;
 }
@@ -118,6 +118,7 @@ export default {
 }
 .el-main{
     background: #eaeaea;
+    height: 100%;
 }
 .iconfont{
     margin-right: 10px;

@@ -14,6 +14,9 @@ const Rpoerts = () => import(/* webpackChunkName: "Order_Rpoerts" */ '../views/r
 const Rights = () => import(/* webpackChunkName: "Order_Rights" */ '../views/power/Rights.vue')
 const Roles = () => import(/* webpackChunkName: "Order_Roles" */ '../views/power/Roles.vue')
 const Cate = () => import(/* webpackChunkName: "Order_Cate" */ '../views/goods/Cate.vue')
+const Params = () => import(/* webpackChunkName: "Order_Params" */ '../views/goods/Params.vue')
+const GoodsList = () => import(/* webpackChunkName: "Order_List" */ '../views/goods/List.vue')
+const GoodsAdd = () => import(/* webpackChunkName: "Order_Add" */ '../views/goods/Add.vue')
 
 Vue.use(VueRouter)
 
@@ -36,7 +39,10 @@ const routes = [
       { path: '/reports', component: Rpoerts },
       { path: '/rights', component: Rights },
       { path: '/roles', component: Roles },
-      { path: '/categories', component: Cate }
+      { path: '/categories', component: Cate },
+      { path: '/params', component: Params },
+      { path: '/goods', component: GoodsList },
+      { path: '/goods/add', component: GoodsAdd }
     ]
   }
 ]

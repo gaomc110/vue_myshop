@@ -10,7 +10,7 @@
   <el-card>
     <el-row>
       <el-col>
-        <el-button type="primary" @click="showAddDialog">添加分类</el-button>
+        <el-button type="primary" size="mini" @click="showAddDialog">添加分类</el-button>
       </el-col>
     </el-row>
     <!--表格-->
