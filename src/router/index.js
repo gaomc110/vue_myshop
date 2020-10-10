@@ -17,6 +17,7 @@ const Cate = () => import(/* webpackChunkName: "Order_Cate" */ '../views/goods/C
 const Params = () => import(/* webpackChunkName: "Order_Params" */ '../views/goods/Params.vue')
 const GoodsList = () => import(/* webpackChunkName: "Order_List" */ '../views/goods/List.vue')
 const GoodsAdd = () => import(/* webpackChunkName: "Order_Add" */ '../views/goods/Add.vue')
+const Order = () => import(/* webpackChunkName: "Order_Add" */ '../views/order/Order.vue')
 
 Vue.use(VueRouter)
 
@@ -42,7 +43,8 @@ const routes = [
       { path: '/categories', component: Cate },
       { path: '/params', component: Params },
       { path: '/goods', component: GoodsList },
-      { path: '/goods/add', component: GoodsAdd }
+      { path: '/goods/add', component: GoodsAdd },
+      { path: '/orders', component: Order }
     ]
   }
 ]

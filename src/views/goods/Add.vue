@@ -26,8 +26,8 @@
             <el-form-item label="商品名称" prop="goods_name">
                <el-input v-model="addForm.goods_name" size="mini"></el-input>
             </el-form-item>
-            <el-form-item label="商品价格" prop="goods_pirce">
-               <el-input v-model="addForm.goods_pirce" type="number" size="mini"></el-input>
+            <el-form-item label="商品价格" prop="goods_price">
+               <el-input v-model="addForm.goods_price" type="number" size="mini"></el-input>
             </el-form-item>
             <el-form-item label="商品重量" prop="goods_weight">
                <el-input v-model="addForm.goods_weight" type="number" size="mini"></el-input>
@@ -66,7 +66,13 @@
               <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
             </el-upload>
           </el-tab-pane>
-          <el-tab-pane label="商品内容" name="4">商品内容</el-tab-pane>
+          <el-tab-pane label="商品内容" name="4">
+            <!--富文本编辑器-->
+            <quill-editor 
+            v-model="addForm.goods_introduce">
+            </quill-editor>
+            <el-button type="primary" class="btnAdd" @click="add">添加商品</el-button>
+          </el-tab-pane>
         </el-tabs>
       </el-form>  
     </el-card>
@@ -80,6 +86,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   data() {
     return {
@@ -87,17 +94,20 @@ export default {
       // 添加表单的数据对象
       addForm: {
         goods_name: '',
-        goods_pirce: 0,
+        goods_price: 0,
         goods_weight: 0,
         goods_number: 0,
         // 选择的商品所属的数据
         goods_cat: [],
         // 图片的数组
-        pics: []
+        pics: [],
+        // 商品的详情描述
+        goods_introduce: '',
+        attrs: []
       },
       addFormRules: {
         goods_name: [{ required: true, message: '请输入商品名称', trigger: 'blur' }],
-        goods_pirce: [{ required: true, message: '请输入商品价格', trigger: 'blur' }],
+        goods_price: [{ required: true, message: '请输入商品价格', trigger: 'blur' }],
         goods_weight: [{ required: true, message: '请输入商品重量', trigger: 'blur' }],
         goods_number: [{ required: true, message: '请输入商品数量', trigger: 'blur' }],
         goods_cat: [{ required: true, message: '请选择商品分类', trigger: 'change' }]
@@ -179,6 +189,37 @@ export default {
       const picinfo = { pic : response.data.tmp_path }
       // 2.将图片信息对象，push 到pics数组中
       this.addForm.pics.push(picinfo)
+    },
+    // 添加商品
+    add() {
+      this.$refs.addFormRef.validate(async valid => {
+        if (!valid) {
+          return this.$message.error('请填写必要的表单项！')
+        }
+        // 执行添加的业务逻辑 
+        // lodash cloneDeep(obj) 深拷贝(需要深拷贝是因为addForm中有级联选择器的双向数据绑定，没法组操作原对象结构)
+        const form = _.cloneDeep(this.addForm)
+        form.goods_cat = form.goods_cat.join(',')
+        // 处理动态参数
+        this.manyTableData.forEach(item => {
+          const newInfo = { attr_id: item.attr_id, attr_value: item.attr_vals.join(' ') }
+          this.addForm.attrs.push(newInfo)
+        })
+        // 处理静态属性
+        this.onlyTableData.forEach(item => {
+          const newInfo = { attr_id: item.attr_id, attr_value: item.attr_vals }
+          this.addForm.attrs.push(newInfo)
+        })
+        form.attrs = this.addForm.attrs
+        console.log(form)
+        // 发起请求添加商品
+        const { data: res } = await this.$http.post('goods', form)
+        if (res.meta.status !== 201) {
+          return this.$message.error('添加商品失败')
+        }
+        this.$message.success('添加商品成功')
+        this.$router.push('/goods')
+      })
     }
   },
   computed: {
@@ -198,5 +239,8 @@ export default {
 }
 .previewImg {
   width: 100%;
+}
+.btnAdd {
+  margin-top: 15px;
 }
 </style>
