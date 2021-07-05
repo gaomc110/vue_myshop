@@ -150,6 +150,7 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error('获取商品分类数据失败')
       }
+      console.log(res.data.result)
       this.catelist = res.data.result
       this.total = res.data.total
     },
